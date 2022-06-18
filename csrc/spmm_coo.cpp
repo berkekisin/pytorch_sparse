@@ -1,7 +1,7 @@
 #include <torch/script.h>
 #include <vector>
 
-//#include "cpu/spmm_coo_cpu.h"
+#include "cpu/spmm_coo_cpu.h"
 #include "cuda/spmm_coo_cuda.h"
 
 inline std::vector<int64_t> list2vec(const c10::List<int64_t> list)
@@ -38,8 +38,8 @@ std::tuple<torch::Tensor, torch::optional<torch::Tensor>> spmm_coo_fw(
     }
     else
     {
+        return spmm_coo_cpu(row, col, optional_value, mat, dim_size, reduce);
         AT_ERROR("Row Tensor not in GPU!");
-        //return spmm_coo_cpu(row, col, optional_value, mat, dim_size, reduce);
     }
 }
 
