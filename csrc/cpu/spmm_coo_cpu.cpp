@@ -34,7 +34,7 @@ std::tuple<torch::Tensor, torch::optional<torch::Tensor>> spmm_coo_cpu(
     if(reduce2REDUCE.at(reduce) == MIN || reduce2REDUCE.at(reduce) == MAX)
     {
         arg_out = torch::full_like(res, mat.size(0), row.options());
-        arg_out_data = arg_out.data_ptr<int64_t>();
+        arg_out_data = arg_out.value().data_ptr<int64_t>();
     }
 
     auto row_data = row.data_ptr<int64_t>();
