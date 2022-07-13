@@ -1,5 +1,3 @@
-from torch_sparse._spmm_coo_cuda import spmm_coo_sum, spmm_coo_mean, 
-                                        spmm_coo_max, spmm_coo_min
    
 
 def spmm_coo(row, col, mat, dim_size, value=None, reduce='sum'):
@@ -16,12 +14,12 @@ def spmm_coo(row, col, mat, dim_size, value=None, reduce='sum'):
     :rtype: :class:`Tensor`
     """
     if reduce == 'sum':
-        return spmm_coo_sum(row, col, value, mat, dim_size)
+        return torch.ops.torch_sparse.spmm_coo_sum(row, col, value, mat, dim_size)                                 
     elif reduce == 'mean':
-        return spmm_coo_mean(row, col, value, mat, dim_size)
+        return torch.ops.torch_sparse.spmm_coo_mean(row, col, value, mat, dim_size)                                   
     elif reduce == 'max':
-        return spmm_coo_max(row, col, value, mat, dim_size)[0]
+        return torch.ops.torch_sparse.spmm_coo_max(row, col, value, mat, dim_size)[0]                            
     elif reduce == 'min':
-        return spmm_coo_min(row, col, value, mat, dim_size)[0]
+        return torch.ops.torch_sparse.spmm_coo_min(row, col, value, mat,dim_size)[0]
     else:
         raise ValueError
