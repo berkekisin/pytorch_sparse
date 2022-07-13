@@ -1,4 +1,4 @@
-   
+import torch
 
 def spmm_coo(row, col, mat, dim_size, value=None, reduce='sum'):
     """Matrix product of sparse matrix with dense matrix in coo format.
